@@ -22,7 +22,7 @@ restored.
 ## Installation
 
 ```bash
-composer require silvershop/product-bundles
+composer require silvershop-suite/product-bundles
 ```
 
 Then run a dev/build with a flush:

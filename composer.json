@@ -1,5 +1,5 @@
 {
-    "name": "silvershop/product-bundles",
+    "name": "silvershop-suite/product-bundles",
     "description": "Product bundles for SilverShop: sell a product that groups other products, with per-component quantities and automatic component stock linkage.",
     "type": "silverstripe-vendormodule",
     "keywords": [
