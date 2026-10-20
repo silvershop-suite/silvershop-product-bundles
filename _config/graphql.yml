@@ -1,0 +1,14 @@
+---
+Name: silvershop-product-bundles-graphql
+Only:
+  moduleexists: 'silvershop-suite/api-graphql'
+After:
+  - '#graphql-schema-default'
+---
+# Registers this module's _graphql/ type fragment into the default schema — only when the GraphQL overlay is
+# installed, so product-bundles stays standalone. Adds Product.bundle, which rides the REST BundleProductEnrichment.
+SilverStripe\GraphQL\Schema\Schema:
+  schemas:
+    default:
+      src:
+        silvershop-product-bundles: 'silvershop-suite/product-bundles: _graphql'

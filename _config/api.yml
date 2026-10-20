@@ -1,0 +1,11 @@
+---
+Name: silvershop-product-bundles-api
+Only:
+  moduleexists: 'silvershop-suite/api'
+---
+# Registers this module's bundle enricher onto the REST base's ProductSerializer — only when silvershop-suite/api is
+# installed, so product-bundles stays standalone. Adds a `bundle` object (components, choice groups, savings) to the
+# serialised product; the GraphQL Product.bundle field rides the same output (see _graphql/).
+SilverShop\Api\Serializer\ProductSerializer:
+  extensions:
+    - SilverShop\ProductBundles\Enrichment\BundleProductEnrichment

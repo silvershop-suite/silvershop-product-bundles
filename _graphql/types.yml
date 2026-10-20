@@ -1,0 +1,44 @@
+# Re-opens the shared Product type (declared in silvershop-suite/api-graphql's _graphql/types.yml) to add the `bundle`
+# field, and defines the nested ProductBundle / BundleComponent / BundleChoiceGroup types. Field names mirror
+# SilverShop\ProductBundles\Enrichment\BundleProductEnrichment ($data['bundle']) key-for-key, so GraphQL's default
+# array field-resolver maps the REST serializer's output with no PHP. silverstripe/graphql merges the field into the
+# single Product type (Type::mergeWith). Only read when the overlay is installed (see _config/graphql.yml guard).
+
+# Adds Product.bundle — rides SilverShop\ProductBundles\Enrichment\BundleProductEnrichment (null unless a BundleProduct)
+Product:
+  fields:
+    bundle: ProductBundle
+
+# A bundle's pricing + contents. Money fields are plain floats (the serializer money shape); `savingsPercentage` is an
+# integer percentage. `components` are the bundled lines, `choiceGroups` the mix-and-match groups.
+ProductBundle:
+  fields:
+    pricingType: String
+    componentsPrice: Float
+    savings: Float
+    savingsPercentage: Int
+    components: '[BundleComponent]'
+    choiceGroups: '[BundleChoiceGroup]'
+
+# One bundled line (a SilverShop\ProductBundles\Model\BundleItem row): the component product/variation it references,
+# the quantity in one bundle, whether it is an optional extra, its choice-group id (0 = none) and its price contribution.
+BundleComponent:
+  fields:
+    productID: Int
+    variationID: Int
+    title: String
+    quantity: Int
+    optional: Boolean
+    choiceGroupID: Int
+    price: Float
+
+# A mix-and-match choice group (SilverShop\ProductBundles\Model\BundleChoiceGroup): choose `min`..`max` (0 = no upper
+# limit) of its component items; `range` is the human-readable summary; `itemIDs` are the BundleComponent item ids in it.
+BundleChoiceGroup:
+  fields:
+    id: Int
+    title: String
+    min: Int
+    max: Int
+    range: String
+    itemIDs: '[Int]'

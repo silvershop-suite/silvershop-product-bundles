@@ -29,12 +29,14 @@
     "require-dev": {
         "cambis/silverstan": "^2.1",
         "php-http/guzzle7-adapter": "^1.1",
+        "silvershop-suite/api": "^1.0",
         "silvershop/stock": "^6",
         "silverstripe/recipe-testing": "^4",
         "silverstripe/sqlite3": "^4",
         "squizlabs/php_codesniffer": "^3.0"
     },
     "suggest": {
+        "silvershop-suite/api": "Exposes the bundle contents (components, choice groups and savings) over the REST api/v1 product payload and, with silvershop-suite/api-graphql, over GraphQL (Product.bundle).",
         "silvershop/stock": "Decrements each bundled product's warehouse stock on purchase and restores it when an order is cancelled."
     },
     "scripts": {
