@@ -10,6 +10,12 @@ use SilverShop\ProductBundles\Model\BundleChoiceGroup;
 use SilverShop\ProductBundles\Model\BundleItem;
 use SilverShop\ProductBundles\Page\BundleProduct;
 
+// silvershop-suite/api is optional: without it this class stays undeclared,
+// because a flush loads every class and would fail on the missing parent.
+if (!class_exists(ProductEnrichmentExtension::class)) {
+    return;
+}
+
 /**
  * Adds a `bundle` object to the serialised product when silvershop-suite/product-bundles is installed and the product
  * is a {@link BundleProduct}; null for every ordinary product.
